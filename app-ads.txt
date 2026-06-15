@@ -1,0 +1,14 @@
+# Dayly — app-ads.txt
+# https://iabtechlab.com/ads-txt/
+#
+# AdMob publisher ID:
+# Replace the placeholder below with your real AdMob publisher ID
+# (pub-XXXXXXXXXXXXXXXX) once you have set up your AdMob account and
+# linked Dayly to it. You can find your publisher ID in the AdMob
+# console at https://apps.admob.com under Account → Account information.
+#
+# This file must also be reachable at https://kinexapps.com/app-ads.txt
+# (the "Developer Website" URL you list in App Store Connect),
+# since that's the URL AdMob's crawler will check.
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dayly — A scrapbook for the dates you can't afford to forget</title>
+<meta name="description" content="Dayly is a paper-scrapbook countdown reminder app for the moments that matter — birthdays, anniversaries, holidays, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EDD8;
+    --cream-hi: #FDF7E5;
+    --card: #FAF3DC;
+    --ink: #1F1A0F;
+    --ink-soft: #3D3322;
+    --ink-faint: #7A6B4F;
+    --terra: #B05B3B;
+    --terra-dk: #7E3E25;
+    --rose: #E7B3B3;
+    --sage: #B7C9A8;
+    --butter: #E9D592;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Patrick Hand', 'Kalam', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.55;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.018) 1px, transparent 1px);
+    background-size: 22px 22px, 36px 36px;
+    background-position: 0 0, 11px 11px;
+  }
+  header {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 36px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-family: 'Caveat', cursive;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  nav a {
+    color: var(--ink-soft);
+    margin-left: 18px;
+    text-decoration: none;
+    border-bottom: 1.5px dashed var(--ink-faint);
+  }
+  nav a:hover { color: var(--terra); border-bottom-color: var(--terra); }
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: center;
+    margin-top: 30px;
+  }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; gap: 30px; }
+    .qr-card { margin: 0 auto; }
+  }
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 78px;
+    line-height: 1.0;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .tagline {
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 3px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .lede {
+    font-family: 'Kalam', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 26px;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    margin-bottom: 30px;
+  }
+  .features div::before {
+    content: "✦ ";
+    color: var(--terra);
+    margin-right: 4px;
+  }
+  .qr-card {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    padding: 22px 22px 18px;
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 0 var(--ink-soft), 0 14px 28px rgba(0,0,0,0.18);
+    text-align: center;
+    width: 320px;
+    position: relative;
+  }
+  .qr-card::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 28px;
+    width: 86px;
+    height: 22px;
+    background: var(--rose);
+    transform: rotate(-6deg);
+    opacity: 0.85;
+    border-radius: 2px;
+  }
+  .qr-card img {
+    width: 240px;
+    height: 240px;
+    background: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    display: block;
+    margin: 4px auto 12px;
+  }
+  .qr-card .label {
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .badges {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 12px 22px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 12px;
+    font-family: 'Kalam', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-decoration: none;
+    box-shadow: 0 4px 0 var(--terra-dk), 0 10px 22px rgba(0,0,0,0.18);
+    transition: transform 0.15s;
+  }
+  .badge:hover { transform: translateY(-2px); }
+  .badge.alt { background: var(--terra); }
+  section.card {
+    margin-top: 60px;
+    background: var(--card);
+    border: 1.5px dashed var(--ink-faint);
+    border-radius: 10px;
+    padding: 26px 28px;
+  }
+  section.card h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 30px 24px 50px;
+    border-top: 1px dashed var(--ink-faint);
+    color: var(--ink-soft);
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer a { color: var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Dayly</div>
+  <nav>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="support.html">Support</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <div>
+      <h1>Dayly</h1>
+      <div class="tagline">· Every day matters ·</div>
+      <div class="lede">A scrapbook for the dates you can't afford to forget.</div>
+      <div class="features">
+        <div>Hand-drawn paper aesthetic</div>
+        <div>Birthdays, events, holidays</div>
+        <div>Beautiful home-screen widgets</div>
+        <div>Custom reminders &amp; notifications</div>
+        <div>Smooth countdowns down to the second</div>
+        <div>Private — your data stays on device</div>
+      </div>
+      <div class="badges">
+        <a class="badge" id="app-store-link" href="#">Download on the App Store</a>
+        <a class="badge alt" href="support.html">Get support</a>
+      </div>
+    </div>
+
+    <div class="qr-card">
+      <img id="qr" alt="Scan to download Dayly on the App Store">
+      <div class="label">Scan to download</div>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>What is Dayly?</h2>
+    <p>Dayly turns the dates that matter into a scrapbook you'll actually want to open. Pin birthdays, anniversaries, holidays, and one-off milestones to a paper-themed home screen and watch the days flip by. Notifications keep you a step ahead, and a widget brings your next big day right to your home screen.</p>
+  </section>
+
+  <section class="card">
+    <h2>Made by Kinex Apps</h2>
+    <p>Dayly is built by <a href="https://kinexapps.com/" style="color: var(--terra);">Kinex Apps</a>. Questions, feedback, or feature requests? We'd love to hear from you — <a href="mailto:muhammadharisgift1@gmail.com" style="color: var(--terra);">muhammadharisgift1@gmail.com</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div>© <span id="year"></span> Kinex Apps · All rights reserved</div>
+  <div>
+    <a href="privacy.html">Privacy</a> ·
+    <a href="terms.html">Terms</a> ·
+    <a href="support.html">Support</a> ·
+    <a href="https://kinexapps.com/">kinexapps.com</a>
+  </div>
+</footer>
+
+<script>
+  // Update this once the app is live on the App Store.
+  // Example final URL: https://apps.apple.com/app/dayly/id1234567890
+  const APP_STORE_URL = "https://apps.apple.com/app/dayly/id0000000000";
+
+  document.getElementById('qr').src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=4&data=" +
+    encodeURIComponent(APP_STORE_URL);
+  document.getElementById('app-store-link').href = APP_STORE_URL;
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
